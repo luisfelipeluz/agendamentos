@@ -1,0 +1,26 @@
+<div class="container">
+  <h2>Lista de Agendamentos</h2>
+  <button class="btn btn-primary mb-3" [routerLink]="['/agendamentos/novo']">Novo Agendamento</button>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Serviço</th>
+        <th>Profissional</th>
+        <th>Cliente</th>
+        <th>Telefone</th>
+        <th>Data/Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let agendamento of agendamentos">
+        <td>{{ agendamento.id }}</td>
+        <td>{{ agendamento.servico }}</td>
+        <td>{{ agendamento.profissional }}</td>
+        <td>{{ agendamento.cliente }}</td>
+        <td>{{ agendamento.telefoneCliente }}</td>
+        <td>{{ agendamento.dataHoraAgendamento | date:'dd/MM/yyyy HH:mm' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

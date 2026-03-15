@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -21,11 +22,11 @@ public class AgendamentoService {
         LocalDateTime horaAgendamento = agendamento.getDataHoraAgendamento();
         LocalDateTime horaFim = agendamento.getDataHoraAgendamento().plusHours(1);
 
-        Agendamento agendados = agendamentoRepository.findByServicoAndDataHoraAgendamentoBetween(agendamento.getServico(),
+        List<Agendamento> agendados = agendamentoRepository.findByServicoAndDataHoraAgendamentoBetween(agendamento.getServico(),
             horaAgendamento, horaFim);
 
 
-        if(Objects.nonNull(agendados)){
+        if(!agendados.isEmpty()){
             throw new RuntimeException("Horário já está preenchido");
         }
         return agendamentoRepository.save(agendamento);
@@ -36,11 +37,15 @@ public class AgendamentoService {
         agendamentoRepository.deleteByDataHoraAgendamentoAndCliente(dataHoraAgendamento, cliente);
     }
 
-    public Agendamento buscarAgendamentoDia(LocalDate data) {
+    public List<Agendamento> buscarAgendamentoDia(LocalDate data) {
         LocalDateTime primeiraHoraDia = data.atStartOfDay();
         LocalDateTime horaFinal = data.atTime(23, 59, 59);
 
         return agendamentoRepository.findByDataHoraAgendamentoBetween(primeiraHoraDia, horaFinal);
+    }
+
+    public List<Agendamento> buscarTodosAgendamentos() {
+        return agendamentoRepository.findAll();
     }
 
     public Agendamento alterarAgendamento(Agendamento agendamento, String cliente, LocalDateTime dataHoraAgendamento){

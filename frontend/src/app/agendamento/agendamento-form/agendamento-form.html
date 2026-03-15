@@ -1,0 +1,26 @@
+<div class="container">
+  <h2>Novo Agendamento</h2>
+  <form [formGroup]="agendamentoForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="servico" class="form-label">Serviço</label>
+      <input type="text" id="servico" class="form-control" formControlName="servico">
+    </div>
+    <div class="mb-3">
+      <label for="profissional" class="form-label">Profissional</label>
+      <input type="text" id="profissional" class="form-control" formControlName="profissional">
+    </div>
+    <div class="mb-3">
+      <label for="cliente" class="form-label">Cliente</label>
+      <input type="text" id="cliente" class="form-control" formControlName="cliente">
+    </div>
+    <div class="mb-3">
+      <label for="telefoneCliente" class="form-label">Telefone do Cliente</label>
+      <input type="text" id="telefoneCliente" class="form-control" formControlName="telefoneCliente">
+    </div>
+    <div class="mb-3">
+      <label for="dataHoraAgendamento" class="form-label">Data e Hora</label>
+      <input type="datetime-local" id="dataHoraAgendamento" class="form-control" formControlName="dataHoraAgendamento">
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!agendamentoForm.valid">Salvar</button>
+  </form>
+</div>
